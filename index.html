@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vinda, ThatianeS2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: blueviolet;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: blueviolet;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: white;
+        }
+        h2 {
+            color: white;
+        }
+        button {
+            padding: 20px 30px;
+            background-color: navajowhite;
+            border: none;
+            border-radius: 10px;
+            cursor: grab;
+        }
+        button:hover {
+            background-color: chocolate;
+        }
+        /* Adicionando o estilo para os botões gerados */
+        .newButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: rgb(228, 238, 142);
+            position: absolute;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bem-vinda, ThatianeS2</h1>
+        <h2>Casa Comigo?</h2>
+        <!-- Botão original -->
+        <button id="originalButton">Simmm</button>
+    </div>
+
+    <script>
+        // Obter referência ao botão original
+        const originalButton = document.getElementById('originalButton');
+
+        // Função para gerar uma posição aleatória
+        function getRandomPosition() {
+            const width = window.innerWidth; // Largura da janela
+            const height = window.innerHeight; // Altura da janela
+
+            // Gerar posição aleatória para o novo botão
+            const randomTop = Math.random() * (height - 50); // Para evitar que o botão ultrapasse a altura
+            const randomLeft = Math.random() * (width - 150); // Para evitar que o botão ultrapasse a largura
+
+            return { top: randomTop, left: randomLeft };
+        }
+
+        // Função para criar um novo botão em uma posição aleatória
+        function createNewButton() {
+            // Criar o novo botão
+            const newButton = document.createElement('button');
+            newButton.textContent = 'Simmm';
+            newButton.classList.add('newButton');
+
+            // Obter uma posição aleatória
+            const position = getRandomPosition();
+
+            // Definir a posição do botão
+            newButton.style.top = `${position.top}px`;
+            newButton.style.left = `${position.left}px`;
+
+            // Adicionar o novo botão à página
+            document.body.appendChild(newButton);
+
+            // Adicionar evento de clique ao novo botão
+            newButton.addEventListener('click', function() {
+                // Criar outro novo botão na próxima vez
+                createNewButton();
+
+                // Remover o botão atual
+                newButton.remove();
+            });
+
+            // Remover o botão original após o primeiro clique
+            if (originalButton) {
+                originalButton.remove();
+            }
+        }
+
+        // Adicionar o evento de clique ao botão original
+        originalButton.addEventListener('click', createNewButton);
+    </script>
+
+</body>
+</html>
